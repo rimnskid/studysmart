@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Free study calculators and learning tools for students worldwide.">
+<title>StudySmart | Learn smarter. Calculate faster.</title>
+<style>
+:root{--navy:#172554;--blue:#3157d5;--ink:#17233b;--muted:#64748b;--bg:#f5f7fc;--line:#e5eaf3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Arial,sans-serif}
+.top{background:white;border-bottom:1px solid var(--line);padding:16px max(20px,calc((100% - 1080px)/2));font-weight:800;font-size:21px;color:var(--navy)}.top span{color:var(--blue)}
+.hero{background:linear-gradient(120deg,#14234f,#3157d5);color:white;padding:60px 22px}.inner,main{max-width:1080px;margin:auto}.hero h1{font-size:clamp(34px,6vw,56px);line-height:1.08;margin:12px 0}.hero p{max-width:620px;color:#e1e9ff;font-size:17px}.pill{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#dbe5ff}
+main{padding:32px 20px 55px}.heading{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:18px}h2{margin:0;font-size:25px}.muted{color:var(--muted);font-size:14px;margin:4px 0 0}
+.search{padding:11px;border:1px solid #cbd5e1;border-radius:9px;font-size:14px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;box-shadow:0 5px 18px #14234f0b}.card h3{margin:0 0 3px;font-size:17px}.card p{margin:0 0 13px;color:var(--muted);font-size:13px}
+label{display:block;font-size:12px;font-weight:bold;margin:10px 0 4px}input,select{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px}
+button{width:100%;margin-top:12px;padding:11px;background:var(--blue);color:white;border:0;border-radius:8px;font-weight:bold;cursor:pointer}.result{margin-top:10px;background:#eff3ff;color:#243f9b;border-radius:8px;padding:10px;font-size:13px;font-weight:bold;min-height:40px;overflow-wrap:anywhere}
+.info{margin-top:25px;background:white;border:1px solid var(--line);border-radius:14px;padding:20px}.info p{color:var(--muted);font-size:14px}.note{font-size:12px;color:var(--muted);margin-top:16px}footer{text-align:center;background:white;border-top:1px solid var(--line);padding:22px;color:var(--muted);font-size:12px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.grid{grid-template-columns:1fr}.heading{display:block}.search{width:100%;margin-top:12px}.hero{padding:45px 20px}}
+</style>
+</head>
+<body>
+<div class="top">Study<span>Smart</span> ✦</div>
+<header class="hero"><div class="inner"><div class="pill">Free learning tools for students worldwide</div><h1>Learn smarter.<br>Calculate faster.</h1><p>Simple tools to help you check your work, plan your study time and understand the numbers behind your learning.</p></div></header>
+<main>
+<div class="heading"><div><h2>Study tools</h2><p class="muted">Choose a tool and enter your numbers.</p></div><input class="search" id="search" placeholder="Search tools..." aria-label="Search tools"></div>
+<div class="grid" id="grid">
+<section class="card" data-key="percentage percent maths"><h3>％ Percentage calculator</h3><p>Find a percentage of a number.</p><label>Percentage (%)</label><input id="pct" type="number" placeholder="e.g. 15"><label>Number</label><input id="pnum" type="number" placeholder="e.g. 200"><button onclick="percent()">Calculate</button><div class="result" id="pout">Your answer will appear here.</div></section>
+<section class="card" data-key="grade marks score exam"><h3>✓ Grade percentage</h3><p>Turn marks into a percentage.</p><label>Marks you got</label><input id="marks" type="number" min="0" placeholder="e.g. 42"><label>Total possible marks</label><input id="total" type="number" min="1" placeholder="e.g. 50"><button onclick="grade()">Calculate</button><div class="result" id="gout">Your answer will appear here.</div></section>
+<section class="card" data-key="average mean maths"><h3>∑ Average calculator</h3><p>Find the mean of a list of numbers.</p><label>Numbers (separate with commas)</label><input id="nums" placeholder="e.g. 65, 72, 80, 91"><button onclick="average()">Find average</button><div class="result" id="aout">Your answer will appear here.</div></section>
+<section class="card" data-key="age birthday date"><h3>◷ Age calculator</h3><p>Calculate age in full years.</p><label>Date of birth</label><input id="birth" type="date"><button onclick="age()">Calculate age</button><div class="result" id="ageout">Your answer will appear here.</div></section>
+<section class="card" data-key="budget money spending"><h3>¤ Budget calculator</h3><p>Work out what remains after expenses.</p><label>Money available</label><input id="money" type="number" min="0" placeholder="e.g. 500"><label>Planned expenses</label><input id="expenses" type="number" min="0" placeholder="e.g. 320"><button onclick="budget()">Calculate balance</button><div class="result" id="bout">Your answer will appear here.</div></section>
+<section class="card" data-key="unit converter kilometres miles"><h3>⇄ Distance converter</h3><p>Convert kilometres and miles.</p><label>Distance</label><input id="dist" type="number" min="0" placeholder="e.g. 5"><label>Convert from</label><select id="direction"><option value="km">Kilometres to miles</option><option value="mi">Miles to kilometres</option></select><button onclick="convert()">Convert</button><div class="result" id="dout">Your answer will appear here.</div></section>
+<section class="card" data-key="study planner schedule time"><h3>▤ Study session planner</h3><p>Break study time into manageable sessions.</p><label>Available time (minutes)</label><input id="minutes" type="number" min="1" placeholder="e.g. 90"><button onclick="plan()">Make a plan</button><div class="result" id="sout">Your plan will appear here.</div></section>
+<section class="card" data-key="fraction decimal maths"><h3>½ Fraction to decimal</h3><p>Convert a fraction into a decimal.</p><label>Numerator (top number)</label><input id="numerator" type="number" placeholder="e.g. 3"><label>Denominator (bottom number)</label><input id="denominator" type="number" placeholder="e.g. 4"><button onclick="fraction()">Convert</button><div class="result" id="fout">Your answer will appear here.</div></section>
+<section class="card" data-key="speed distance time physics"><h3>➜ Speed calculator</h3><p>Calculate average speed.</p><label>Distance (kilometres)</label><input id="distance" type="number" min="0" placeholder="e.g. 120"><label>Time (hours)</label><input id="time" type="number" min="0" placeholder="e.g. 2"><button onclick="speed()">Calculate speed</button><div class="result" id="vout">Your answer will appear here.</div></section>
+</div>
+<div class="info"><h2>Why StudySmart?</h2><p>StudySmart is a simple collection of browser-based tools for learners. Use the calculators to check your work, plan your study time and practise understanding numbers.</p></div>
+<p class="note"><strong>Early version:</strong> This starter website works on your device but is not published online yet. It does not currently show ads or generate income. Any future public launch, advertising or payment setup should involve a parent or guardian. Income is never guaranteed.</p>
+</main>
+<footer>StudySmart · Learn smarter. Calculate faster. · © 2026</footer>
+<script>
+const el=id=>document.getElementById(id), val=id=>Number(el(id).value), has=id=>el(id).value.trim()!=='', show=(id,msg)=>el(id).textContent=msg;
+function percent(){let p=val('pct'),n=val('pnum');if(!has('pct')||!has('pnum'))return show('pout','Enter both numbers.');show('pout',p+'% of '+n+' = '+(p*n/100).toLocaleString())}
+function grade(){let m=val('marks'),t=val('total');if(!has('marks')||!has('total')||t<=0||m<0||m>t)return show('gout','Enter valid marks. Your score must be between 0 and the total.');show('gout','Your score is '+(m/t*100).toFixed(1)+'%.')}
+function average(){let raw=el('nums').value.trim(),a=raw.split(',').map(x=>x.trim());if(!raw||a.some(x=>x===''||!Number.isFinite(Number(x))))return show('aout','Enter numbers separated by commas.');show('aout','Average: '+(a.map(Number).reduce((x,y)=>x+y,0)/a.length).toFixed(2))}
+function age(){let v=el('birth').value;if(!v)return show('ageout','Choose a date of birth.');let b=new Date(v+'T00:00:00'),n=new Date();if(b>n)return show('ageout','Date cannot be in the future.');let a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;show('ageout','Age: '+a+' full years.')}
+function budget(){let m=val('money'),e=val('expenses');if(!has('money')||!has('expenses')||m<0||e<0)return show('bout','Enter two valid amounts.');let r=m-e;show('bout',r>=0?'Remaining: '+r:'Over budget by '+Math.abs(r))}
+function convert(){let n=val('dist'),km=el('direction').value==='km';if(!has('dist')||n<0)return show('dout','Enter a valid distance.');show('dout',n+' '+(km?'km':'miles')+' = '+(km?n*.621371:n/.621371).toFixed(3)+' '+(km?'miles':'km'))}
+function plan(){let n=val('minutes');if(!has('minutes')||n<=0)return show('sout','Enter a number greater than zero.');let s=Math.floor(n/30),r=n%30;show('sout',s?s+' session(s) of 30 minutes'+(r?' plus '+r+' extra minute(s)':'')+'. Take short breaks.':'Study for '+n+' minutes, then take a break.')}
+function fraction(){let a=val('numerator'),b=val('denominator');if(!has('numerator')||!has('denominator')||b===0)return show('fout','Enter a numerator and a non-zero denominator.');show('fout',a+'/'+b+' = '+(a/b).toFixed(5).replace(/0+$/,'').replace(/\.$/,''))}
+function speed(){let d=val('distance'),t=val('time');if(!has('distance')||!has('time')||d<0||t<=0)return show('vout','Enter a valid distance and time greater than zero.');show('vout','Average speed: '+(d/t).toFixed(2)+' km/h')}
+el('search').addEventListener('input',e=>{let q=e.target.value.toLowerCase(),count=0;document.querySelectorAll('.card').forEach(c=>{let ok=(c.dataset.key+' '+c.innerText).toLowerCase().includes(q);c.hidden=!ok;if(ok)count++});let old=el('none');if(old)old.remove();if(!count){let d=document.createElement('p');d.id='none';d.textContent='No tools found. Try another search.';d.style.cssText='grid-column:1/-1;text-align:center;color:#64748b;padding:20px';el('grid').appendChild(d)}});
+</script>
+</body>
+</html>
